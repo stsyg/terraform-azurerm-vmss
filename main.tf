@@ -115,33 +115,33 @@ module "vmscaleset" {
 
 # Add vNet peering to the Bastion enabled vNet, e.g. in the lab it's st-infra-vnet
 
-# Lookup exisiting RG for infra vNet
-data "azurerm_resource_group" "rginfra" {
-  name     = "st-infra-rg"
-}
-
-# VMSS vNet RG detais
-data "azurerm_virtual_network" "vnet1" {
-  name                = "st-vmss-vnet"
-  resource_group_name = "st-vmss-rg"
-}
-
-# Infra vNet RG details
-data "azurerm_virtual_network" "vnet2" {
-  name                = "st-infra-vnet"
-  resource_group_name = data.azurerm_resource_group.rginfra.name
-}
-
-resource "azurerm_virtual_network_peering" "vnet1to2" {
-  name                      = "peer_vNet1_to_vNet2"
-  resource_group_name       = data.azurerm_virtual_network.vnet1.resource_group_name
-  virtual_network_name      = data.azurerm_virtual_network.vnet1.name
-  remote_virtual_network_id = data.azurerm_virtual_network.vnet2.id
-}
-
-resource "azurerm_virtual_network_peering" "vnet2to1" {
-  name                      = "peer_vNet2_to_vNet1"
-  resource_group_name       = data.azurerm_virtual_network.vnet2.resource_group_name
-  virtual_network_name      = data.azurerm_virtual_network.vnet2.name
-  remote_virtual_network_id = data.azurerm_virtual_network.vnet1.id
-}
+# # Lookup exisiting RG for infra vNet
+# data "azurerm_resource_group" "rginfra" {
+#   name     = "st-infra-rg"
+# }
+# 
+# # VMSS vNet RG detais
+# data "azurerm_virtual_network" "vnet1" {
+#   name                = "st-vmss-vnet"
+#   resource_group_name = "st-vmss-rg"
+# }
+# 
+# # Infra vNet RG details
+# data "azurerm_virtual_network" "vnet2" {
+#   name                = "st-infra-vnet"
+#   resource_group_name = data.azurerm_resource_group.rginfra.name
+# }
+# 
+# resource "azurerm_virtual_network_peering" "vnet1to2" {
+#   name                      = "peer_vNet1_to_vNet2"
+#   resource_group_name       = data.azurerm_virtual_network.vnet1.resource_group_name
+#   virtual_network_name      = data.azurerm_virtual_network.vnet1.name
+#   remote_virtual_network_id = data.azurerm_virtual_network.vnet2.id
+# }
+# 
+# resource "azurerm_virtual_network_peering" "vnet2to1" {
+#   name                      = "peer_vNet2_to_vNet1"
+#   resource_group_name       = data.azurerm_virtual_network.vnet2.resource_group_name
+#   virtual_network_name      = data.azurerm_virtual_network.vnet2.name
+#   remote_virtual_network_id = data.azurerm_virtual_network.vnet1.id
+# }
